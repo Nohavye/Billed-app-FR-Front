@@ -34,7 +34,7 @@ describe("Given I am connected as an employee", () => {
 
   describe("When I am on NewBill Page", () => {
 
-    test("Then when I choose a file and the upload fails.", async () => {
+    test("Then when I choose a file in the bad format.", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
@@ -49,7 +49,7 @@ describe("Given I am connected as an employee", () => {
 
       const consoleError = jest.spyOn(console, 'error').mockImplementation()
 
-      const test_file = new File([''], 'test.jpg', {type: 'image/jpg'})
+      const test_file = new File([''], 'test.jpg', {type: 'text/plain'})
       userEvent.upload(inputFile, test_file)
 
       // TESTED VALUES ----------------------------------------
@@ -60,8 +60,35 @@ describe("Given I am connected as an employee", () => {
 
       consoleError.mockRestore()
     })
+
+    test("Then when I choose a file in the right format and the upload fails.", async () => {
+      const html = NewBillUI()
+      document.body.innerHTML = html
+
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({ pathname })
+      }
+
+      new NewBill({ document, onNavigate, store: storeMockBadFile, localStorage })
+
+      await waitFor(() => screen.getByTestId('file'))
+      const inputFile = screen.getByTestId('file')
+
+      const consoleError = jest.spyOn(console, 'error').mockImplementation()
+
+      const test_file = new File([''], 'test.jpg', {type: 'image/jpeg'})
+      userEvent.upload(inputFile, test_file)
+
+      // TESTED VALUES ----------------------------------------
+      await waitFor(() => {
+        expect(consoleError).toHaveBeenCalled()
+        expect(consoleError.mock.calls[0][0]).toBe(undefined)
+      })
+
+      consoleError.mockRestore()
+    })
     
-    test("Then when I choose a file and it uploaded successfully.", async () => {
+    test("Then when I choose a file in the right format and it uploaded successfully.", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
