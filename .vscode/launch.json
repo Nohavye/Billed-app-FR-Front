@@ -18,7 +18,7 @@
             "program": "${workspaceFolder}/node_modules/.bin/jest",
             "args": ["${relativeFile}", "--runInBand"],
             "cwd": "${workspaceFolder}",
-            "console": "externalTerminal"
+            "console": "integratedTerminal"
         }
     ]
 }

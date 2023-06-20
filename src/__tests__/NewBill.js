@@ -55,7 +55,7 @@ describe("Given I am connected as an employee", () => {
       // TESTED VALUES ----------------------------------------
       await waitFor(() => {
         expect(consoleError).toHaveBeenCalled()
-        expect(consoleError.mock.calls[0][0]).toBe(undefined)
+        expect(consoleError.mock.calls[0][0]).toBe('Invalid file format')
       })
 
       consoleError.mockRestore()
@@ -76,7 +76,7 @@ describe("Given I am connected as an employee", () => {
 
       const consoleLog = jest.spyOn(console, 'log').mockImplementation()
 
-      const test_file = new File([''], 'test.jpg', {type: 'image/jpg'})
+      const test_file = new File([''], 'test.jpg', {type: 'image/jpeg'})
       userEvent.upload(inputFile, test_file)
 
       // TESTED VALUES ----------------------------------------
@@ -122,6 +122,7 @@ describe("Given I am connected as an employee", () => {
 
       // TESTED VALUES ----------------------------------------
       await waitFor(() => {
+        // expect(consoleLog).toBeCalled()
         expect(consoleLog).toHaveBeenCalled()
         expect(consoleLog.mock.calls[0][1]).toBe(
           '2023-06-01'
