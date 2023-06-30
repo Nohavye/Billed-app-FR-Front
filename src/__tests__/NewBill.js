@@ -34,7 +34,7 @@ describe("Given I am connected as an employee", () => {
 
   describe("When I am on NewBill Page", () => {
 
-    test("Then when I choose a file in the bad format.", async () => {
+    test("=> Then when I choose a file in the bad format.", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
@@ -61,7 +61,7 @@ describe("Given I am connected as an employee", () => {
       consoleError.mockRestore()
     })
 
-    test("Then when I choose a file in the right format and the upload fails.", async () => {
+    test("=> Then when I choose a file in the right format and the upload fails.", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
@@ -88,7 +88,7 @@ describe("Given I am connected as an employee", () => {
       consoleError.mockRestore()
     })
     
-    test("Then when I choose a file in the right format and it uploaded successfully.", async () => {
+    test("=> Then when I choose a file in the right format and it uploaded successfully.", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
@@ -118,7 +118,7 @@ describe("Given I am connected as an employee", () => {
       consoleLog.mockRestore()
     })
 
-    test("Then when I complete the form correctly and submit it.", async () => {
+    test("=> Then when I complete the form correctly and submit it.", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 

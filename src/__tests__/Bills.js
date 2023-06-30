@@ -74,7 +74,7 @@ describe("Given I am connected as an employee", () => {
             expect(dates).toEqual(datesSorted)
         })
         
-        test("Then the 'new bill' button should be present", async () => {
+        test("=> Then the 'new bill' button should be present", async () => {
             
             document.body.innerHTML = BillsUI({ data: databills })
             
@@ -85,7 +85,7 @@ describe("Given I am connected as an employee", () => {
             expect(screen.getByTestId(btnId)).toBeTruthy()
         })
         
-        test("Then when I click on the 'new bill' button the 'new bill' page comes up", async () => {
+        test("=> Then when I click on the 'new bill' button the 'new bill' page comes up", async () => {
             document.body.innerHTML = `
               <div id="root"></div>
             `
@@ -106,7 +106,7 @@ describe("Given I am connected as an employee", () => {
             })
         })
 
-        test("Then, when I click on the eye icon, the proof modal is displayed", async () => {
+        test("=> Then, when I click on the eye icon, the proof modal is displayed", async () => {
             document.body.innerHTML = `
                 <div id="root"></div>
             `
@@ -131,7 +131,7 @@ describe("Given I am connected as an employee", () => {
             expect(modaleFile.style.display).toEqual('block')
         })
 
-        test("Then, when the returned data is correct, the table of saved bills is displayed.", async () => {
+        test("=> Then, when the returned data is correct, the table of saved bills is displayed.", async () => {
           document.body.innerHTML = `
             <div id="root"></div>
           `
@@ -158,7 +158,7 @@ describe("Given I am connected as an employee", () => {
           consoleLog.mockRestore()
         })
 
-        test("Then, when the data returned has incorrect dates, the table of saved bills is displayed with the dates unformatted.", async () => {
+        test("=> Then, when the data returned has incorrect dates, the table of saved bills is displayed with the dates unformatted.", async () => {
           document.body.innerHTML = `
             <div id="root"></div>
           `
