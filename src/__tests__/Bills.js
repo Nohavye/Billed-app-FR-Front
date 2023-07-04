@@ -23,18 +23,6 @@ import Bills from "../containers/Bills.js"
 import BillsUI from "../views/BillsUI.js"
 import { bills as databills } from "../fixtures/bills.js"
 
-// FONCTION TO LOG HTML OUTPUT ---------------------------
-function log_html_output(message) {
-  const fs = require('fs')
-  const filePath = 'test.html'
-
-  fs.writeFile(filePath, message + '\n', (error) => {
-    if (error) {
-      console.error('Erreur lors de l\'écriture dans le fichier de log :', error)
-    }
-  })
-}
-
 // COMMON INITIAL CONDITIONS ----------------------------
 Object.defineProperty(window, 'localStorage', { value: localStorageMock })
 

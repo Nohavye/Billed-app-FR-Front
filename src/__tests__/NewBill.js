@@ -30,11 +30,11 @@ window.localStorage.setItem('user', JSON.stringify({
 }))
 
 // TESTS ===============================================
-describe("Given I am connected as an employee", () => {
+describe("Given I am connected as an employee and I am on NewBill Page", () => {
 
-  describe("When I am on NewBill Page", () => {
+  describe("When I choose a file with the wrong format", () => {
 
-    test("=> Then when I choose a file in the bad format.", async () => {
+    test("=> then the console should return the error message 'Invalid file format'", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
@@ -60,8 +60,11 @@ describe("Given I am connected as an employee", () => {
 
       consoleError.mockRestore()
     })
+  })
 
-    test("=> Then when I choose a file in the right format and the upload fails.", async () => {
+  describe("When I choose a file with the right format and the upload fails", () => {
+
+    test("=> then the console should return the error message", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
@@ -82,13 +85,15 @@ describe("Given I am connected as an employee", () => {
       // TESTED VALUES ----------------------------------------
       await waitFor(() => {
         expect(consoleError).toHaveBeenCalled()
-        expect(consoleError.mock.calls[0][0]).toBe(undefined)
       })
 
       consoleError.mockRestore()
     })
+  })
     
-    test("=> Then when I choose a file in the right format and it uploaded successfully.", async () => {
+  describe("When I choose a file with the right format and it uploaded successfully", () => {
+
+    test("=> Then the console should return the links to the file just uploaded", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
@@ -110,15 +115,17 @@ describe("Given I am connected as an employee", () => {
       await waitFor(() => {
         expect(consoleLog).toHaveBeenCalled()
         expect(consoleLog.mock.calls[0][0]).toBe('https://localhost:3456/images/test.jpg')
-        newbill.billId = 1234
-        newbill.fileUrl = 'https://localhost:3456/images/test.jpg'
-        newbill.fileName = 'test.jpg'
+        expect(newbill.billId).toBe('1234')
+        expect(newbill.fileUrl).toBe('https://localhost:3456/images/test.jpg')
       })
 
       consoleLog.mockRestore()
     })
+  })
 
-    test("=> Then when I complete the form correctly and submit it.", async () => {
+  describe("When I complete the form correctly and submit it", () => {
+
+    test("=> Then the console should return the creation date of the new expense report", async () => {
       const html = NewBillUI()
       document.body.innerHTML = html
 
@@ -149,14 +156,10 @@ describe("Given I am connected as an employee", () => {
 
       // TESTED VALUES ----------------------------------------
       await waitFor(() => {
-        // expect(consoleLog).toBeCalled()
         expect(consoleLog).toHaveBeenCalled()
         expect(consoleLog.mock.calls[0][1]).toBe(
           '2023-06-01'
         )
-        newbill.billId = 1234
-        newbill.fileUrl = 'https://localhost:3456/images/test.jpg'
-        newbill.fileName = 'test.jpg'
       })
 
       consoleLog.mockRestore()
