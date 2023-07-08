@@ -6,6 +6,7 @@ import 'jquery'
 import 'bootstrap'
 
 // TESTING LIBRARIES -------------------------------------
+import '@testing-library/jest-dom'
 import { screen, waitFor } from "@testing-library/dom"
 import userEvent from '@testing-library/user-event'
 
@@ -89,9 +90,10 @@ describe("Given I am connected as an employee", () => {
             userEvent.click(btn)
 
             // TESTED VALUES ----------------------------------------
-            await waitFor(() => {
-              expect(document.documentURI).toEqual('http://localhost/#employee/bill/new')
-            })
+            await waitFor(() => screen.getByTestId('content-title'))
+            const content_title = screen.getByTestId('content-title')
+            expect(content_title).toHaveTextContent('Envoyer une note de frais')
+            expect(document.documentURI).toEqual('http://localhost/#employee/bill/new')
         })
 
         test("=> Then, when I click on the eye icon, the proof modal is displayed", async () => {

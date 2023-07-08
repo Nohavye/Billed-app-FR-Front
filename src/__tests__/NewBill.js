@@ -6,6 +6,7 @@ import 'jquery'
 import 'bootstrap'
 
 // TESTING LIBRARIES -------------------------------------
+import '@testing-library/jest-dom'
 import { screen, waitFor } from "@testing-library/dom"
 import userEvent from '@testing-library/user-event'
 
